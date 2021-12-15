@@ -11,7 +11,6 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     private static final String fullNameTemplate = "%s %s";
     private final AtomicLong counter = new AtomicLong();
-    private final LocalTime time = LocalTime.now();
 
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
@@ -30,6 +29,7 @@ public class GreetingController {
     
     @ResponseBody @PostMapping("/get-user")
     public UserInfo contact(@RequestBody User user) {
+    	LocalTime time = LocalTime.now();
         return new UserInfo(String.format(fullNameTemplate, user.getFirstName(), user.getLastName()), time);
     }
 }
